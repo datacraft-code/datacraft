@@ -84,6 +84,28 @@ function depositInChest(item, min_left, max, dir)
     turtle.select(oldInventorySlot)
 end
 
+function depositInChestExcept(blacklist_)
+    local deposit_chest_slot = 16
+    local blacklist = {"enderstorage:ender_storage", "minecraft:torch"}
+    if type(blacklist_) == "string" then
+        push(blacklist, blacklist_)
+    elseif type(blacklist_) == "table" then
+        concat(blacklist, blacklist_)
+    end
+
+    local function depositItems()
+        for i=1,16 do
+            item = turtle.getItemDetail(i)
+            if item and not includes(blacklist, item.name) then
+                turtle.select(i)
+                turtle.drop()
+            end
+        end
+    end
+
+    depositItems()
+end
+
 function interactWithEnderChest(chest_slot, handler)
     local turns = 0
     while turns < 4 do
@@ -151,7 +173,7 @@ function takeFromChest(dir)
 end
 
 function tryRefuel(fuelType, fuelLimit)
-    local fuelType = fuelType or "quark:charcoal_block"
+    local fuelType = fuelType or "mekanism:block_charcoal"
     local fuelLimit = fuelLimit or 250
     local fuelCount = countInInventory(fuelType)
     if fuelCount == 0 and fuelType ~= "minecraft:coal_block" then
