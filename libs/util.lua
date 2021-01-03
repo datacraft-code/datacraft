@@ -106,7 +106,7 @@ function depositInChestExcept(blacklist_)
     depositItems()
 end
 
-function interactWithEnderChest(chest_slot, handler)
+function interactWithInventoryChest(chest_slot, handler)
     local turns = 0
     while turns < 4 do
         if not turtle.inspect() then
@@ -136,7 +136,7 @@ function withdrawFuelEnderChest(count)
         turtle.suck(count)
     end
 
-    interactWithEnderChest(fuel_chest_slot, withdrawFuel)
+    interactWithInventoryChest(fuel_chest_slot, withdrawFuel)
 end
 
 function depositItemsEnderChestExcept(blacklist_)
@@ -158,7 +158,21 @@ function depositItemsEnderChestExcept(blacklist_)
         end
     end
 
-    interactWithEnderChest(deposit_chest_slot, depositItems)
+    interactWithInventoryChest(deposit_chest_slot, depositItems)
+end
+
+function depositItemInBin(item_to_deposit, bin_slot)
+    local function depositItems()
+        for i=1,16 do
+            slot_item = turtle.getItemDetail(i)
+            if slot_item and slot_item.name == item_to_deposit then
+                turtle.select(i)
+                turtle.drop()
+            end
+        end
+    end
+
+    interactWithInventoryChest(bin_slot, depositItems)
 end
 
 function takeFromChest(dir)
@@ -252,10 +266,32 @@ ore_blocks = {
     "minecraft:iron_ore",
     "minecraft:gold_ore",
     "minecraft:coal_ore",
+
     "railcraft:ore_metal",
     "railcraft:ore_metal_poor",
     "thermalfoundation:ore",
     "forestry:resources",
+
+    "create:copper_ore",
+    "create:zinc_ore",
+
+    "mekanism:fluorite_ore",
+    "mekanism:copper_ore",
+    "mekanism:tin_ore",
+    "mekanism:osmium_ore",
+    "mekanism:uranium_ore",
+    "mekanism:lead_ore",
+
+    "thermal:cinnabar_ore",
+    "thermal:niter_ore",
+    "thermal:sulfur_ore",
+    "thermal:copper_ore",
+    "thermal:tin_ore",
+    "thermal:lead_ore",
+    "thermal:silver_ore",
+    "thermal:nickel_ore",
+    
+    "thermal:tin_ore",
 }
 
 basic_blocks = {
