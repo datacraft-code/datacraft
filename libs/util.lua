@@ -106,7 +106,7 @@ function depositInChestExcept(blacklist_)
     depositItems()
 end
 
-function interactWithInventoryChest(chest_slot, handler)
+function interactWithInventoryChest(chest_slot, handler, should_leave)
     local turns = 0
     while turns < 4 do
         if not turtle.inspect() then
@@ -115,8 +115,10 @@ function interactWithInventoryChest(chest_slot, handler)
             turtle.place()
             turtle.select(1)
             handler()
-            turtle.select(chest_slot)
-            turtle.dig()
+            if not should_leave then
+                turtle.select(chest_slot)
+                turtle.dig()
+            end
             turtle.select(old_inventory_slot)
             break
         end
@@ -173,6 +175,28 @@ function depositItemInBin(item_to_deposit, bin_slot)
     end
 
     interactWithInventoryChest(bin_slot, depositItems)
+end
+
+function depositItemsInBarrelExcept(blacklist_, barrel_slot)
+    local deposit_chest_slot = 16
+    local blacklist = {"minecraft:barrel", "minecraft:torch", "mekanism:block_charcoal"}
+    if type(blacklist_) == "string" then
+        push(blacklist, blacklist_)
+    elseif type(blacklist_) == "table" then
+        concat(blacklist, blacklist_)
+    end
+
+    local function depositItems()
+        for i=1,16 do
+            item = turtle.getItemDetail(i)
+            if item and not includes(blacklist, item.name) then
+                turtle.select(i)
+                turtle.drop()
+            end
+        end
+    end
+
+    interactWithInventoryChest(deposit_chest_slot, depositItems, true)
 end
 
 function takeFromChest(dir)

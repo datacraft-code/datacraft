@@ -71,9 +71,9 @@ function dfs(targeting, all_sides, pos)
     end
 
     function loop()
-        if util.countFreeSlots() < 2 then
-            util.depositItemsEnderChestExcept("quark:charcoal_block")
-        end
+        -- if util.countFreeSlots() < 2 then
+        --     util.depositItemsInBarrelExcept({}, 16)
+        -- end
         util.tryRefuel(fuel, 500)
         if dir == 6 then
             local back = pop()
@@ -235,7 +235,8 @@ function passage(length, steps, pos)
     local function passagePost()
         if util.countFreeSlots() < 1 then
             -- util.depositItemsEnderChestExcept("mekanism:charcoal_block")
-            util.depositItemInBin("minecraft:cobblestone", 16)
+            -- util.depositItemInBin("minecraft:cobblestone", 16)
+            util.depositItemsInBarrelExcept({}, 16)
         end
         if util.countFreeSlots() < 1 then
             error("Out of inv space")
