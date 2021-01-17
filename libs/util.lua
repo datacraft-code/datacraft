@@ -109,7 +109,12 @@ end
 function interactWithInventoryChest(chest_slot, handler, should_leave)
     local turns = 0
     while turns < 4 do
+        turtle.turnRight()
+        turns = turns + 1
         if not turtle.inspect() then
+            if should_leave and turns == 4 then
+                break
+            end
             local old_inventory_slot = turtle.getSelectedSlot() 
             turtle.select(chest_slot)
             turtle.place()
@@ -122,8 +127,6 @@ function interactWithInventoryChest(chest_slot, handler, should_leave)
             turtle.select(old_inventory_slot)
             break
         end
-        turtle.turnRight()
-        turns = turns + 1
     end
     turns = turns % 4
     for i=1,turns do
@@ -217,7 +220,7 @@ function tryRefuel(fuelType, fuelLimit)
     if fuelCount == 0 and fuelType ~= "minecraft:coal_block" then
         return tryRefuel("minecraft:coal_block", fuelLimit)
     end
-    if fuelCount < 3 then
+    if fuelCount < 2 then
         local fuel_slot = findInInventory(fuelType)
         if fuel_slot ~= -1 then
             turtle.select(fuel_slot)

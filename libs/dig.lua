@@ -233,7 +233,7 @@ function passage(length, steps, pos)
     pos:nestedSave("passage")
 
     local function passagePost()
-        if util.countFreeSlots() < 1 then
+        if util.countFreeSlots() < 3 then
             -- util.depositItemsEnderChestExcept("mekanism:charcoal_block")
             -- util.depositItemInBin("minecraft:cobblestone", 16)
             util.depositItemsInBarrelExcept({}, 16)
