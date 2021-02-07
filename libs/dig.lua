@@ -12,7 +12,7 @@ local function addInFront(target_blocks)
     target_blocks[blockData.name] = true
 end
 
-function dfs(targeting, all_sides, pos)
+function dfs(targeting, all_sides, pos, avoidRefuel)
     local pos = pos or position.Position:create()
     targeting = targeting or "scan"
     local target_blocks = {}
@@ -74,7 +74,9 @@ function dfs(targeting, all_sides, pos)
         -- if util.countFreeSlots() < 2 then
         --     util.depositItemsInBarrelExcept({}, 16)
         -- end
-        util.tryRefuel(fuel, 500)
+        if not avoidRefuel then
+            util.tryRefuel(fuel, 500)
+        end
         if dir == 6 then
             local back = pop()
             if back < 4 then
@@ -123,7 +125,9 @@ function dfs(targeting, all_sides, pos)
         dir = dir + 1
     end
 
-    util.tryRefuel(fuel, 500)
+    if not avoidRefuel then
+        util.tryRefuel(fuel, 500)
+    end
     if all_sides then
         push(7)
     else
