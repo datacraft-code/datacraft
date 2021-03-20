@@ -146,7 +146,7 @@ end
 
 function depositItemsEnderChestExcept(blacklist_)
     local deposit_chest_slot = 16
-    local blacklist = {"enderstorage:ender_storage", "minecraft:torch"}
+    local blacklist = {"enderstorage:ender_chest", "minecraft:torch"}
     if type(blacklist_) == "string" then
         push(blacklist, blacklist_)
     elseif type(blacklist_) == "table" then
@@ -217,9 +217,6 @@ function tryRefuel(fuelType, fuelLimit)
     local fuelType = fuelType or "mekanism:block_charcoal"
     local fuelLimit = fuelLimit or 250
     local fuelCount = countInInventory(fuelType)
-    if fuelCount == 0 and fuelType ~= "minecraft:coal_block" then
-        return tryRefuel("minecraft:coal_block", fuelLimit)
-    end
     if fuelCount < 2 then
         local fuel_slot = findInInventory(fuelType)
         if fuel_slot ~= -1 then

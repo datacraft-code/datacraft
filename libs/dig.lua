@@ -238,9 +238,7 @@ function passage(length, steps, pos)
 
     local function passagePost()
         if util.countFreeSlots() < 3 then
-            -- util.depositItemsEnderChestExcept("mekanism:block_charcoal")
-            -- util.depositItemInBin("minecraft:cobblestone", 16)
-            util.depositItemsInBarrelExcept({}, 16)
+            util.depositItemsEnderChestExcept("mekanism:block_charcoal")
         end
         if util.countFreeSlots() < 1 then
             error("Out of inv space")
