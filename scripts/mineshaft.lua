@@ -32,20 +32,32 @@ function dropAllBut64Fuel()
 end
 
 function postMove()
-    local isBlock, blockData = turtle.inspectUp()
-    if isBlock and blockData and not string.match(blockData.name, "chest$") then
-        turtle.digUp()
-    end
+    turtle.digUp()
     turtle.digDown()
-    util.tryRefuel("mekanism:block_charcoal", 500)
-    if (turtle.getItemCount(16) > 0) then
-        pos:savePos()
-        pos:goToPos(0, 0, 0, 0)
-        dropAllBut64Fuel()
-        util.tryRefuel("mekanism:block_charcoal", 500)
-        pos:loadPos()
-        util.tryRefuel("mekanism:block_charcoal", 500)
+    if util.countFreeSlots() < 3 then
+        util.depositItemsEnderChestExcept("mekanism:block_charcoal")
     end
+    if util.countFreeSlots() < 1 then
+        error("Out of inv space")
+    end
+    util.tryRefuel("mekanism:block_charcoal", 500)
+    -- dig.dfs("ore", true, pos)
+
+    -- Pre-ender chest code
+    -- local isBlock, blockData = turtle.inspectUp()
+    -- if isBlock and blockData and not string.match(blockData.name, "chest$") then
+    --     turtle.digUp()
+    -- end
+    -- turtle.digDown()
+    -- util.tryRefuel("mekanism:block_charcoal", 500)
+    -- if (turtle.getItemCount(16) > 0) then
+    --     pos:savePos()
+    --     pos:goToPos(0, 0, 0, 0)
+    --     dropAllBut64Fuel()
+    --     util.tryRefuel("mekanism:block_charcoal", 500)
+    --     pos:loadPos()
+    --     util.tryRefuel("mekanism:block_charcoal", 500)
+    -- end
 end
 
 -- Position:coverGridAndReturn(initial_forward_dist, depth, left, right, pre, post, withdraw, deposit)
@@ -59,5 +71,5 @@ while pos.z > -(depth - 1) do
     lastDigLevel = pos.z
     pos:coverGridAndReturn(0, forward, left, right, preMove, postMove)
 end
+util.depositItemsEnderChestExcept("mekanism:block_charcoal")
 pos:goToPos(0, 0, 0, 0)
-dropAllBut64Fuel()

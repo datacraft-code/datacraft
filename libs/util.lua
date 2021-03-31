@@ -111,7 +111,8 @@ function interactWithInventoryChest(chest_slot, handler, should_leave)
     while turns < 4 do
         turtle.turnRight()
         turns = turns + 1
-        if not turtle.inspect() then
+        present, block = turtle.inspect()
+        if not present or block.name == 'minecraft:water' then
             if should_leave and turns == 4 then
                 break
             end
