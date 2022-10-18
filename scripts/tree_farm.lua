@@ -15,7 +15,7 @@ function plant()
 end
 
 function deposit()
-    util.depositInChestExcept({"minecraft:birch_sapling", "mekanism:block_charcoal"})
+    util.depositInChestExcept({"minecraft:birch_sapling", "thermal:charcoal_block"})
 end
 
 function withdraw()
@@ -25,7 +25,7 @@ end
 function suck()
     turtle.suck()
     turtle.suckDown()
-    util.tryRefuel("mekanism:block_charcoal")
+    util.tryRefuel("thermal:charcoal_block")
 end
 
 function inspectTrees()

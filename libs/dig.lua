@@ -142,7 +142,7 @@ function dfs(targeting, all_sides, pos, avoidRefuel)
         loop()
     end
     -- if totalBlocks > 1 then
-    --     util.depositItemsEnderChestExcept("mekanism:block_charcoal")
+    --     util.depositItemsEnderChestExcept("thermal:charcoal_block")
     -- end
 end
 
@@ -152,7 +152,7 @@ function tunnel(left, right, up, down, length, pos, should_dfs)
 
     local function tunnelPre()
         if util.countFreeSlots() < 2 then
-            util.depositItemsEnderChestExcept("mekanism:block_charcoal")
+            util.depositItemsEnderChestExcept("thermal:charcoal_block")
         end
         util.tryRefuel(fuel, 500)
         if should_dfs then
@@ -238,7 +238,7 @@ function passage(length, steps, pos)
 
     local function passagePost()
         if util.countFreeSlots() < 3 then
-            -- util.depositItemsEnderChestExcept("mekanism:block_charcoal")
+            -- util.depositItemsEnderChestExcept("thermal:charcoal_block")
             -- util.depositItemInBin("minecraft:cobblestone", 16)
             util.depositItemsInBarrelExcept({}, 16)
         end

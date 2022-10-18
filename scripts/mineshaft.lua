@@ -16,12 +16,12 @@ function dropAllBut64Fuel()
     for i=1,16 do
         local detail = turtle.getItemDetail(i) 
         local itemDetail = turtle.getItemDetail(i)
-        if itemDetail and itemDetail.name ~= "mekanism:block_charcoal" then
+        if itemDetail and itemDetail.name ~= "thermal:charcoal_block" then
             turtle.select(i)
             turtle.drop()
         end
     end
-    util.moveItemFromEverywhere("mekanism:block_charcoal", 1)
+    util.moveItemFromEverywhere("thermal:charcoal_block", 1)
     for i=2,16 do
         turtle.select(i)
         turtle.drop()
@@ -37,14 +37,14 @@ function postMove()
         turtle.digUp()
     end
     turtle.digDown()
-    util.tryRefuel("mekanism:block_charcoal", 500)
+    util.tryRefuel("thermal:charcoal_block", 500)
     if (turtle.getItemCount(16) > 0) then
         pos:savePos()
         pos:goToPos(0, 0, 0, 0)
         dropAllBut64Fuel()
-        util.tryRefuel("mekanism:block_charcoal", 500)
+        util.tryRefuel("thermal:charcoal_block", 500)
         pos:loadPos()
-        util.tryRefuel("mekanism:block_charcoal", 500)
+        util.tryRefuel("thermal:charcoal_block", 500)
     end
 end
 

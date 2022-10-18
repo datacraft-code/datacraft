@@ -5,9 +5,9 @@ down = tonumber(args[3])
 
 local function digWallsPre()
     if util.countFreeSlots() < 2 then
-        util.depositItemsEnderChestExcept("mekanism:block_charcoal")
+        util.depositItemsEnderChestExcept("thermal:charcoal_block")
     end
-    util.tryRefuel("mekanism:block_charcoal", 500)
+    util.tryRefuel("thermal:charcoal_block", 500)
     -- dig.dfs("ore", true, pos)
 end
 
