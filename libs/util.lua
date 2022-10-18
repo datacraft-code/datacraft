@@ -220,15 +220,15 @@ function tryRefuel(fuelType, fuelLimit)
     if fuelCount == 0 and fuelType ~= "minecraft:coal_block" then
         return tryRefuel("minecraft:coal_block", fuelLimit)
     end
-    if fuelCount < 2 then
-        local fuel_slot = findInInventory(fuelType)
-        if fuel_slot ~= -1 then
-            turtle.select(fuel_slot)
-        else
-            turtle.select(1)
-        end
-        withdrawFuelEnderChest(4)
-    end
+    -- if fuelCount < 10 then
+    --     local fuel_slot = findInInventory(fuelType)
+    --     if fuel_slot ~= -1 then
+    --         turtle.select(fuel_slot)
+    --     else
+    --         turtle.select(1)
+    --     end
+    --     withdrawFuelEnderChest(4)
+    -- end
     local oldInventorySlot = turtle.getSelectedSlot() 
     while turtle.getFuelLevel() < fuelLimit do
         local inventorySlot = findInInventory(fuelType)
