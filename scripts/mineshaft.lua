@@ -27,8 +27,8 @@ function dropAllBut64Fuel()
         turtle.drop()
     end
     local coalToCollect = turtle.getItemSpace(1) 
-    turtle.suckUp(coalToCollect)
     turtle.select(1)
+    turtle.suckUp(coalToCollect)
 end
 
 function postMove()
