@@ -35,7 +35,7 @@ end
 
 local function saveScripts(folder, script_names)
     for key, script_name in pairs(script_names) do
-        local res = githubGetRequest("https://api.github.com/repos/datacraft-code/datacraft/contents/"..folder.."/"..script_name..".lua")
+        local res = githubGetRequest("https://api.github.com/repos/datacraft-code/datacraft/contents/"..folder.."/"..script_name..".lua?ref=Enderchestless")
         local script = res.readAll()
 
         local h = fs.open("/"..folder.."/"..script_name, "w")
