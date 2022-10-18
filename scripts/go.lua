@@ -11,7 +11,7 @@ end
 
 local function getFileNamesIn(folder)
     local script_names = {}
-    local res = githubGetRequest("https://api.github.com/repos/datacraft-code/datacraft/contents/"..folder)
+    local res = githubGetRequest("https://api.github.com/repos/datacraft-code/datacraft/contents/"..folder.."?ref=Enderchestless")
 
     if res == nil then
         print("Error: HTTP returned nil for /"..folder)
