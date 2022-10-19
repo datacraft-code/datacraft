@@ -19,19 +19,19 @@ local function movePre()
     local blocksPlaced = 0
 
     while not isBlock or blockData.name == "minecraft:water" do
-        if util.countInInventory("minecraft:sand") < 32 then
+        if util.countInInventory("biomesoplenty:orange_sand") < 32 then
             print("Returning for more sand")
             pos:savePos()
             pos:goToPos(0, 0, 0, 0)
             suckSand()
-            if util.countInInventory("minecraft:sand") < 32 then
+            if util.countInInventory("biomesoplenty:orange_sand") < 32 then
                 error("Couldn't get enough sand")
             end
             pos:loadPos()
         end
         local itemDetail = turtle.getItemDetail()
-        if not itemDetail or itemDetail.name ~= "minecraft:sand" then
-            turtle.select(util.findInInventory("minecraft:sand"))
+        if not itemDetail or itemDetail.name ~= "biomesoplenty:orange_sand" then
+            turtle.select(util.findInInventory("biomesoplenty:orange_sand"))
         end
         turtle.placeDown()
         blocksPlaced = blocksPlaced + 1
