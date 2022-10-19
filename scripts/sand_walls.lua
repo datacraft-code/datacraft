@@ -2,6 +2,8 @@ args = {...}
 left = tonumber(args[1])
 forward = tonumber(args[2])
 
+pos = position.Position:create()
+
 local function suckSand()
     for i=2,16 do
         turtle.select(i)
@@ -14,8 +16,9 @@ end
 local function movePre()
     util.tryRefuel("thermal:charcoal_block", 500)
     local isBlock, blockData = turtle.inspectDown()
+    local blocksPlaced = 0
 
-    while not isBlock do
+    while not isBlock or blockData.name == "minecraft:water" do
         if util.countInInventory("minecraft:sand") < 32 then
             print("Returning for more sand")
             pos:savePos()
@@ -28,9 +31,13 @@ local function movePre()
         end
         local itemDetail = turtle.getItemDetail()
         if not itemDetail or itemDetail.name ~= "minecraft:sand" then
-            turtle.select(findInInventory("minecraft:sand"))
+            turtle.select(util.findInInventory("minecraft:sand"))
         end
         turtle.placeDown()
+        blocksPlaced = blocksPlaced + 1
+        if blocksPlaced > 100 then
+            error("Placed too many blocks here")
+        end
         util.countdown(1)
         isBlock, blockData = turtle.inspectDown()
     end
