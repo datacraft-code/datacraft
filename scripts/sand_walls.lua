@@ -10,7 +10,7 @@ local function suckSand()
         turtle.suck(64-turtle.getItemCount(i))
     end
     turtle.select(1)
-    turtle.suckUp(64-turtle.getItemCount(i))
+    turtle.suckUp(64-turtle.getItemCount())
 end
 
 local function movePre()
@@ -19,19 +19,19 @@ local function movePre()
     local blocksPlaced = 0
 
     while not isBlock or blockData.name == "minecraft:water" do
-        if util.countInInventory("biomesoplenty:orange_sand") < 32 then
+        if util.countInInventory("biomesoplenty:white_sand") < 32 then
             print("Returning for more sand")
             pos:savePos()
             pos:goToPos(0, 0, 0, 0)
             suckSand()
-            if util.countInInventory("biomesoplenty:orange_sand") < 32 then
+            if util.countInInventory("biomesoplenty:white_sand") < 32 then
                 error("Couldn't get enough sand")
             end
             pos:loadPos()
         end
         local itemDetail = turtle.getItemDetail()
-        if not itemDetail or itemDetail.name ~= "biomesoplenty:orange_sand" then
-            turtle.select(util.findInInventory("biomesoplenty:orange_sand"))
+        if not itemDetail or itemDetail.name ~= "biomesoplenty:white_sand" then
+            turtle.select(util.findInInventory("biomesoplenty:white_sand"))
         end
         turtle.placeDown()
         blocksPlaced = blocksPlaced + 1
