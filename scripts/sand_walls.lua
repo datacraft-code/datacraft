@@ -14,7 +14,7 @@ local function suckSand()
 end
 
 local function movePre()
-    util.tryRefuel("betterend:charcoal_block", 500)
+    util.tryRefuel("quark:charcoal_block", 500)
     local isBlock, blockData = turtle.inspectDown()
     local blocksPlaced = 0
 

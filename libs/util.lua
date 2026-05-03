@@ -182,7 +182,7 @@ end
 
 function depositItemsInBarrelExcept(blacklist_, barrel_slot)
     local deposit_chest_slot = 16
-    local blacklist = {"minecraft:barrel", "minecraft:torch", "betterend:charcoal_block"}
+    local blacklist = {"minecraft:barrel", "minecraft:torch", "quark:charcoal_block"}
     if type(blacklist_) == "string" then
         push(blacklist, blacklist_)
     elseif type(blacklist_) == "table" then
@@ -214,7 +214,7 @@ function takeFromChest(dir)
 end
 
 function tryRefuel(fuelType, fuelLimit)
-    local fuelType = fuelType or "betterend:charcoal_block"
+    local fuelType = fuelType or "quark:charcoal_block"
     local fuelLimit = fuelLimit or 250
     local fuelCount = countInInventory(fuelType)
     if fuelCount == 0 and fuelType ~= "minecraft:coal_block" then

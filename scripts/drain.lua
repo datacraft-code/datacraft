@@ -6,7 +6,7 @@ depth = tonumber(args[3])
 pos = position.Position:create()
 
 local function placeBlockDown()
-    util.tryRefuel("betterend:charcoal_block", 500)
+    util.tryRefuel("quark:charcoal_block", 500)
     local itemDetail = turtle.getItemDetail()
     if not itemDetail or itemDetail.name ~= "minecraft:cobblestone" then
         local inventorySlot = util.findInInventory("minecraft:cobblestone")
@@ -23,7 +23,7 @@ local function placeBlockDown()
 end
 
 local function digBlockDown()
-    util.tryRefuel("betterend:charcoal_block", 500)
+    util.tryRefuel("quark:charcoal_block", 500)
     turtle.select(2)
     turtle.digDown()
 end
